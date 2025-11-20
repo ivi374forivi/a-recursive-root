@@ -9,6 +9,7 @@ import asyncio
 import logging
 import argparse
 import sys
+from datetime import datetime
 from typing import List
 
 from core.agents.base_agent import AgentConfig, AgentPersonality
@@ -192,7 +193,7 @@ class AICouncilApp:
         # Voting
         voting_result = await self.council._conduct_voting(session)
         session.voting_result = voting_result
-        session.ended_at = asyncio.get_event_loop().time()
+        session.ended_at = datetime.utcnow()
 
         # Add to history
         self.council.session_history.append(session)
